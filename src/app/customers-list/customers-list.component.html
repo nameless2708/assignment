@@ -1,25 +1,4 @@
-<script>
-    /* When the user clicks on the button,
-    toggle between hiding and showing the dropdown content */
-    function myFunction() {
-        document.getElementById("myDropdown").classList.toggle("show");
-    }
 
-    // Close the dropdown if the user clicks outside of it
-    window.onclick = function(event) {
-        if (!event.target.matches('.mydropbtn')) {
-
-            var dropdowns = document.getElementsByClassName("mydropdown-content");
-            var i;
-            for (i = 0; i < dropdowns.length; i++) {
-                var openDropdown = dropdowns[i];
-                if (openDropdown.classList.contains('show')) {
-                    openDropdown.classList.remove('show');
-                }
-            }
-        }
-    }
-</script>
 
 <div class="row" style="background-color: #f4f4f4">
     <div class="col">
@@ -49,43 +28,54 @@
             </div>
         </div>
 
-        <div class="btn-group" style="width:25%; background-color: #ffffff; height:45px;">
-            <input type="text">
-            <div class="mydropdown">
-                <button class="mydropbtn"  type="submit">Dropdown</button>
-                <div class="mydropdown-content" id="myDropdown" style="width:100%">
-                    <div class="row">
-                    <div class="col">
-                    Mã khách hàng
-                    <input type="text" style="text-align: left">
-                    </div>
-                    <div class="col">
-                    Tên khách hàng
-                    <input type="text" style="text-align: left">
-                    </div>
-                    </div>
+        <div class="btn-group" style="width:25%; background-color: #ffffff; height:45px;" >
+            <div style="width: 40px; height:40px; padding-top:10px; padding-left:10px">
+            <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/14173-200.png" width="20px" height="20px"/>
+            </div>
+            <input type="text" style="border-bottom:none ;margin-left:10px" placeholder="Tìm kiếm" >
+            <div class="mydropdown" [formGroup]="searchform" ngForm>
+                <button class="mydropbtn" (click)="dropdo()" type="button">
+                    <img height="16px" width="20px" style="margin-left: 20px;background-color: #ffffff" src="https://image.flaticon.com/icons/svg/60/60995.svg"/>
+                </button>
+                <div class="mydropdown-content" id="myDropdown" (clickOutside)="changeit()" [style.display]="drop">
                     <div class="row">
                         <div class="col">
                             Mã khách hàng
-                            <input type="text" style="text-align: left">
+                            <input type="text" formControlName="customer_id">
                         </div>
                         <div class="col">
                             Tên khách hàng
-                            <input type="text" style="text-align: left">
+                            <input type="text" formControlName="customer_name">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            Mã khách hàng
-                            <input type="text" style="text-align: left">
+                            Điện thoại
+                            <input type="text" formControlName="customer_phone">
                         </div>
                         <div class="col">
-                            Tên khách hàng
-                            <input type="text" style="text-align: left">
+                            Email
+                            <input type="text" formControlName="customer_email">
                         </div>
                     </div>
-
-
+                    <div class="row">
+                        <div class="col">
+                            Chủ sở hữu
+                            <input type="text" formControlName="customer_owner">
+                        </div>
+                        <div class="col">
+                            Mã số thuế
+                            <input type="text" formControlName="customer_code">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit" (click)="search()" class="btn btn-primary waves-light" style="padding-top:5px; margin-left:15px; max-width: 112px; max-height:46px">Tìm kiếm</button>
+                        </div>
+                        <div class="col">
+                            <button type="button" (click)="clearsearchform()" class="btn btn-primary waves-light" style="padding-top:5px; margin-left:10px; max-width: 112px; max-height:46px">Xóa bỏ</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -122,7 +112,7 @@
         <div class="btn-group" >
             <div style="border: 1px groove #f4f4f4; width: 150px; height:45px">
                 <button style="width:30%; height:100%;background-color: #FFFFFF; float:left; border: none" ><img src="https://cdn3.iconfinder.com/data/icons/edition/100/pen_paper_2-512.png" width="70%" height="60%" style="float:left"></button>
-                <button (click)="readyadd()" style="width:70%; height:100%;background-color: #FFFFFF; float:right; border: none; border-left: 2px groove #f4f4f4; font-size: 20px"> Nhập</button>
+                <button (click)="addNewcol()" style="width:70%; height:100%;background-color: #FFFFFF; float:right; border: none; border-left: 2px groove #f4f4f4; font-size: 20px"> Nhập</button>
             </div>
         </div>
         <div class="btn-group" >
@@ -238,7 +228,7 @@
 
                 <!--Numbers-->
                 <div *ngFor="let page of pagearr">
-                    <li class="page-item"><a class="page-link" (click)="getCurrentArr(page)" mdbRippleRadius >{{page}}</a></li>
+                    <li class="page-item"><a class="page-link" (click)="getCurrentpage(page)" mdbRippleRadius >{{page}}</a></li>
                 </div>
                 <!--Arrow right-->
                 <li class="page-item">

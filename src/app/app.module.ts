@@ -13,6 +13,7 @@ import { CustomersListComponent } from './customers-list/customers-list.componen
 import { AppRoutingModule } from './/app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
+import {ClickOutsideModule} from 'ng-click-outside';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { AddCustomerComponent } from './add-customer/add-customer.component';
     AddCustomerComponent
   ],
   imports: [
+      ClickOutsideModule,
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,

@@ -8,21 +8,18 @@ import { HttpClient} from '@angular/common/http';
     styleUrls: ['./customers-list.component.scss']
 })
 export class CustomersListComponent implements OnInit {
-    currentpage : any;
+
     apiArray : any;
-    archiveArray : any;
-    bigArray = [];
+    archiveArray = null;
+    bigArray = null;
     pagearr = [];
     customerarr = [];
-    dropdown = false;
     editArr = [];
     searchform: FormGroup;
     addform : FormGroup;
     editform: FormGroup;
     checked: null;
-
-
-
+    drop = 'none';
     cus_name: null;
     cus_email: null;
     checked100 = false;
@@ -30,14 +27,17 @@ export class CustomersListComponent implements OnInit {
     index: number;
     gotit : boolean;
     items: any;
-
+    checkdrop = false;
 
     constructor(public formBuilder: FormBuilder, public http : HttpClient) {
         this.getListCustomer();
-        this.archiveArray =  this.customerarr;
-
         this.searchform = this.formBuilder.group({
-            data: ['']
+            customer_id: null,
+            customer_name: null,
+            customer_phone: null,
+            customer_email: null,
+            customer_owner: null,
+            customer_code: null
         });
         this.addform = this.formBuilder.group({
             customer_id: ['', Validators.compose([Validators.required])],
@@ -66,18 +66,31 @@ export class CustomersListComponent implements OnInit {
 
     }
 
-    getCurrentArr(curPage){
-        this.currentpage =  this.bigArray;
+    //get current page
+    getCurrentpage(curPage){
         this.customerarr = this.bigArray.slice(0 + ((curPage-1)*10),10 + ((curPage-1)*10));
-        this.bigArray = this.currentpage;
-        console.log(this.customerarr.length);
     }
 
 
-    readyadd(){
+    //add new record
+    addNewcol(){
         this.checked100 = true;
     }
 
+    //get customer from JSON
+    getListCustomer(){
+        this.getApiListCustomer().subscribe(data =>{
+            this.apiArray = data;
+            this.bigArray = JSON.parse(this.apiArray);
+            var pagenum = Math.floor(this.bigArray.length / 10) + 1;
+            for(let i = 1; i<=pagenum; i++){
+                this.pagearr.push(i);
+            }
+            this.getCurrentpage(1);
+        })
+    }
+
+    //add new customer
     addcustomer(){
         this.addNewCustomer();
         if(this.addform.valid){
@@ -95,48 +108,60 @@ export class CustomersListComponent implements OnInit {
         }
     }
 
+    addNewCustomer(){
+        var cus_obj = {"cus_code" : this.addform.value.customer_id, "cus_name" : this.addform.value.customer_name,
+            "cus_phone" : this.addform.value.customer_phone, "cus_email" : this.addform.value.customer_email,
+            "cus_owner" : this.addform.value.customer_owner, "cus_address" : this.addform.value.customer_address,
+            "cus_tax" : this.addform.value.customer_code};
+        this.getApiAddCustomer(JSON.stringify(cus_obj)).subscribe();
+    }
+
+    //search for customer
     search() {
-        //
-        // console.log(this.archiveArray);
-        // if ( this.searchform.value.data != null && this.searchform.value.data != '') {
-        //     var string1;
-        //     var string2;
-        //     for (let a = 0; a < this.customerarr.length; a++) {
-        //         if(this.customerarr[a].cus_code != null){
-        //             string1 = (this.customerarr[a].cus_code).toLowerCase();
-        //             string2 = (this.searchform.value.data).toLowerCase();
-        //             if (string1.indexOf(string2)> -1
-        //                 || this.checkedname(a) || this.checkedemail(a)) {
-        //                 this.resultarr.push(this.customerarr[a]);
-        //             }
-        //         }
-        //     }
-        //     this.customerarr = this.resultarr;
-        // } else {
-        //     this.customerarr = this.archiveArray;
-        // }
-        if(this.searchform.value.data != null && this.searchform.value.data != ''){
-
-
+        if(this.searchform.value.customer_id != null || this.searchform.value.customer_name != null
+        || this.searchform.value.customer_email != null || this.searchform.value.customer_phone != null
+        || this.searchform.value.customer_owner != null || this.searchform.value.customer_code != null){
+            if(this.bigArray != null){
+                this.archiveArray = this.bigArray;
+            }
+            this.searchCustomer();
+        }
+        else {
+            this.bigArray = this.archiveArray;
         }
     }
 
-    onchanging(index){
-        this.customerarr[index].ticked = this.gotit;
+    searchCustomer(){
+        var res : any;
+        var cus = {"cus_code" : this.searchform.value.customer_id, "cus_name" : this.searchform.value.customer_name,
+            "cus_phone" : this.searchform.value.customer_phone, "cus_email" : this.searchform.value.customer_email,
+            "cus_owner" : this.searchform.value.customer_owner, "cus_tax" : this.searchform.value.customer_code};
+        this.getApiSearchCustomer(JSON.stringify(cus)).subscribe(data =>{
+            res = (data);
+            this.bigArray = JSON.parse(res);
+            var pagenum = Math.floor(this.bigArray.length / 10) + 1;
+            this.pagearr = [];
+            for(let i = 1; i<=pagenum; i++){
+                this.pagearr.push(i);
+            }
+            this.getCurrentpage(1);
+        })
+    }
+
+    clearsearchform(){
+        this.searchform.reset();
     }
 
     getindex(index){
-        console.log(this.editArr.length);
         if(this.customerarr[index].ticked == true){
             this.editArr[index.toString()] = this.editform;
-            console.log(this.editArr[index.toString()]);
         }
         else if(this.customerarr[index].ticked == false){
             delete this.editArr[index.toString()];
-            console.log(this.editArr[index.toString()]);
         }
     }
 
+    //allow user to edit selected customer
     allowedit(){
         var newarr = Object.keys(this.editArr);
         for(let i = 0; i < newarr.length; i++){
@@ -155,58 +180,25 @@ export class CustomersListComponent implements OnInit {
                     customer_addcol: ['']
                 });
             }
-            console.log(this.editArr[parseInt(newarr[i])].value.customer_pri);
         }
     }
 
+    //edit selected customer
     editcustomer(i){
-        console.log(this.editArr[i].value.customer_id);
         this.customerarr[i] = { cus_code : this.editArr[i].value.customer_id, cus_name : this.editArr[i].value.customer_name,
             cus_phone : this.editArr[i].value.customer_phone, cus_email : this.editArr[i].value.customer_email, cus_owner : this.editArr[i].value.customer_owner,
             cus_address : this.editArr[i].value.cus_address, cus_tax : this.editArr[i].value.customer_code, ticked : false, allowedit : false };
         var cus_obj = {cus_id:this.editArr[i].value.customer_pri,  cus_code : this.editArr[i].value.customer_id, cus_name : this.editArr[i].value.customer_name,
             cus_phone : this.editArr[i].value.customer_phone, cus_email : this.editArr[i].value.customer_email, cus_owner : this.editArr[i].value.customer_owner,
             cus_address : this.editArr[i].value.customer_address, cus_tax : this.editArr[i].value.customer_code };
-        console.log('update');
         this.updateCustomer(cus_obj);
     }
 
-    checkedname(index : any){
-
-        var string1 = (this.customerarr[index].cus_name).toLowerCase();
-        var string2 = (this.searchform.value.data).toLowerCase();
-        if(this.cus_name != null && this.cus_name != false){
-            if(string1.indexOf(string2) > -1){
-                return true;
-            }
-            else {
-                return false;
-            }
-        }
-        else {
-            return false;
-        }
+    updateCustomer(obj){
+        this.getApiUpdateCustomer( JSON.stringify(obj)).subscribe();
     }
 
 
-
-    checkedemail(index : any){
-        if (this.customerarr[index].cus_email != null){
-            var string1 = (this.customerarr[index].cus_email).toLowerCase();
-            var string2 = (this.searchform.value.data).toLowerCase();
-            if(this.cus_email != null && this.cus_email != false ){
-                if(string1.indexOf(string2) > -1){
-                    return true;
-                }
-                else {
-                    return false;
-                }
-            }
-            else {
-                return false;
-            }
-        }
-    }
 
     addcol1() {
         if (this.checked != null) {
@@ -216,13 +208,13 @@ export class CustomersListComponent implements OnInit {
         }
     }
 
+    //tick or untick all
     setTick(a){
-        console.log(a);
         for(let i =0; i<this.customerarr.length; i++){
             this.customerarr[i].ticked = a;
         }
-
     }
+
 
     getApiAddCustomer(data){
         return this.http.post('https://sum4cp6813.execute-api.ap-southeast-1.amazonaws.com/testStage', data);
@@ -236,37 +228,27 @@ export class CustomersListComponent implements OnInit {
         return this.http.post('https://layjvm9wx1.execute-api.ap-southeast-1.amazonaws.com/update', data);
     }
 
-    addNewCustomer(){
-
-        var cus_obj = {"cus_code" : this.addform.value.customer_id, "cus_name" : this.addform.value.customer_name,
-            "cus_phone" : this.addform.value.customer_phone, "cus_email" : this.addform.value.customer_email,
-            "cus_owner" : this.addform.value.customer_owner, "cus_address" : this.addform.value.customer_address,
-            "cus_tax" : this.addform.value.customer_code};
-        console.log(JSON.stringify(cus_obj));
-        this.getApiAddCustomer(JSON.stringify(cus_obj)).subscribe(data =>{
-            console.log(data);
-        })
+    getApiSearchCustomer(data){
+        return this.http.post('https://6npsrgviu1.execute-api.ap-southeast-1.amazonaws.com/search', data);
     }
 
-    updateCustomer(obj){
-       this.getApiUpdateCustomer( JSON.stringify(obj)).subscribe(data =>{
-           console.log(data);
-       });
-    }
-
-    getListCustomer(){
-        this.getApiListCustomer().subscribe(data =>{
-            this.apiArray = data;
-            this.bigArray = JSON.parse(this.apiArray);
-            var pagenum = Math.floor(this.bigArray.length / 10) + 1;
-            for(let i = 1; i<=pagenum; i++){
-                this.pagearr.push(i);
-            }
-            this.getCurrentArr(1);
-        })
-    }
-
+    //support dropdown
     dropdo(){
-        this.dropdown = true;
+        this.checkdrop = true;
+        if(this.drop == 'block'){
+            this.drop = 'none';
+        }
+        else if(this.drop == 'none'){
+            this.drop = 'block';
+        }
     }
+
+    //support dropdown
+    changeit(){
+        if(this.drop == 'block' && this.checkdrop == false){
+            this.drop = 'none';
+        }
+        this.checkdrop = false;
+    }
+
 }
