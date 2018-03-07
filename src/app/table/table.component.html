@@ -1,0 +1,60 @@
+<div>
+  <div class="row" style="overflow: scroll">
+    <table class="table table-sm table-hover" style="min-width:120%">
+      <thead>
+      <tr>
+        <th class="table-cell">
+          <input type="checkbox" id="a" >
+          <label for="a" class="label-checkbox"></label>
+        </th>
+        <th *ngFor="let item of objectKeys(content[0])">{{item}}</th>
+      </tr>
+      </thead>
+      <tbody>
+      <!--<tr *ngIf="add">-->
+        <!--<td class="table-cell">-->
+          <!--<input type="checkbox" id="add" >-->
+          <!--<label for="add" class="label-checkbox"></label>-->
+        <!--</td>-->
+        <!--<td *ngFor="let key of objectValues(item)"><input type="text"></td>-->
+      <!--</tr>-->
+      <tr *ngFor="let item of content; let i = index">
+        <td class="table-cell">
+          <input type="checkbox" id="{{i}}" >
+          <label for="{{i}}" class="label-checkbox"></label>
+        </td>
+        <td *ngFor="let key of objectValues(item)">{{item[key]}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row" style="display: block" >
+    <nav class="my-4" style="float:right;margin-top: 5px !important; margin-bottom:0px !important; margin-right:20px;">
+      <ul class="pagination pagination-circle pg-blue mb-0">
+        <!--First-->
+        <li class="page-item p"><a class="page-link" mdbRippleRadius (click)="firstpage()">First</a></li>
+        <!--Arrow left-->
+        <li class="page-item">
+          <a class="page-link" mdbRippleRadius aria-label="Previous" (click)="backward()">
+            <span aria-hidden="true">«</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+        <!--Numbers-->
+        <div *ngFor="let page of pages, let i=index" >
+          <li class="page-item {{page.isactive}}"><a class="page-link" (click)="getCurrentPage(i)" mdbRippleRadius [style.padding]="(page.index > 9)?'8px 8.5px 8px 8.5px' : '8px 12px 8px 12px' ">{{page.index}}</a></li>
+        </div>
+        <!--Arrow right-->
+        <li class="page-item">
+          <a class="page-link" mdbRippleRadius aria-label="Next" (click)="forward()">
+            <span aria-hidden="true">»</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+        <!--First-->
+        <li class="page-item"><a class="page-link">Last</a></li>
+
+      </ul>
+    </nav>
+  </div>
+</div>

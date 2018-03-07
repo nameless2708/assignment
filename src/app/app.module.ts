@@ -13,33 +13,46 @@ import { CustomersListComponent } from './customers-list/customers-list.componen
 import { AppRoutingModule } from './/app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
-import {ClickOutsideModule} from 'ng-click-outside';
+import {MDBModalService} from './typescripts/free/modals';
+import { ClickOutsideModule } from 'ng-click-outside';
+import { OpportunityComponent } from './opportunity/opportunity.component';
+import { InputComponent } from './input/input.component';
+import { TableComponent } from './table/table.component';
+import { ButtonComponent } from './button/button.component';
+import { DropdownComponent } from './dropdown/dropdown.component';
+import { InputEmailComponent } from './input-email/input-email.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    CustomersListComponent,
-    AddCustomerComponent
-  ],
-  imports: [
-      ClickOutsideModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    FormsModule,
-      ReactiveFormsModule,
-      HttpClientModule,
-    ToastModule.forRoot(),
-    MDBBootstrapModule.forRoot(),
-    MDBBootstrapModulePro.forRoot(),
-    AgmCoreModule.forRoot({
-      // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en#key
-      apiKey: 'Your_api_key'
-    }),
-    AppRoutingModule
-  ],
-  providers: [MDBSpinningPreloader, FormBuilder,  ReactiveFormsModule],
-  bootstrap: [AppComponent],
-  schemas:      [ NO_ERRORS_SCHEMA ]
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        CustomersListComponent,
+        AddCustomerComponent,
+        OpportunityComponent,
+        InputComponent,
+        TableComponent,
+        ButtonComponent,
+        DropdownComponent,
+        InputEmailComponent
+    ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        ClickOutsideModule,
+        ToastModule.forRoot(),
+        MDBBootstrapModule.forRoot(),
+        MDBBootstrapModulePro.forRoot(),
+        AgmCoreModule.forRoot({
+            // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en#key
+            apiKey: 'Your_api_key'
+        }),
+        AppRoutingModule
+    ],
+    providers: [MDBSpinningPreloader, FormBuilder,  ReactiveFormsModule, MDBModalService],
+    bootstrap: [AppComponent],
+    schemas:      [ NO_ERRORS_SCHEMA ]
 })
 export class AppModule { }

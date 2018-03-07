@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { HttpClient} from '@angular/common/http';
+// import { AddCustomerComponent} from '../add-customer/add-customer.component';
+import { InputComponent} from '../input/input.component';
+import { MDBModalService} from '../typescripts/free/modals';
+import { Router} from '@angular/router';
+
+
 
 @Component({
     selector: 'app-customers-list',
@@ -8,10 +14,9 @@ import { HttpClient} from '@angular/common/http';
     styleUrls: ['./customers-list.component.scss']
 })
 export class CustomersListComponent implements OnInit {
-
-    apiArray : any;
+    loaded = false;
     archiveArray = null;
-    bigArray = null;
+    rawArray = null;
     pagearr = [];
     customerarr = [];
     editArr = [];
@@ -20,17 +25,17 @@ export class CustomersListComponent implements OnInit {
     editform: FormGroup;
     checked: null;
     drop = 'none';
-    cus_name: null;
-    cus_email: null;
+    rowactive = '';
     checked100 = false;
     tickall : false;
-    index: number;
-    gotit : boolean;
-    items: any;
-    checkdrop = false;
+    pagenumber = [];
+    inputcomponent : InputComponent;
 
-    constructor(public formBuilder: FormBuilder, public http : HttpClient) {
+
+    constructor(public formBuilder: FormBuilder, public http : HttpClient, public mdb : MDBModalService, public router : Router) {
+
         this.getListCustomer();
+
         this.searchform = this.formBuilder.group({
             customer_id: null,
             customer_name: null,
@@ -68,9 +73,13 @@ export class CustomersListComponent implements OnInit {
 
     //get current page
     getCurrentpage(curPage){
-        this.customerarr = this.bigArray.slice(0 + ((curPage-1)*10),10 + ((curPage-1)*10));
-    }
+        this.customerarr = this.rawArray.slice(0 + ((curPage-1)*10),10 + ((curPage-1)*10));
+        for(let i=0; i<this.pagearr.length; i++){
+            this.pagearr[i].isactive = '';
+        }
+        this.pagearr[curPage-1].isactive = 'active';
 
+    }
 
     //add new record
     addNewcol(){
@@ -79,14 +88,22 @@ export class CustomersListComponent implements OnInit {
 
     //get customer from JSON
     getListCustomer(){
+        var res;
         this.getApiListCustomer().subscribe(data =>{
-            this.apiArray = data;
-            this.bigArray = JSON.parse(this.apiArray);
-            var pagenum = Math.floor(this.bigArray.length / 10) + 1;
+            res = data;
+            this.rawArray = JSON.parse(res);
+            var pagenum = Math.floor(this.rawArray.length / 10) + 0.5;
             for(let i = 1; i<=pagenum; i++){
-                this.pagearr.push(i);
+                this.pagearr.push({'index' : i, 'isactive' : null});
             }
+            for(let i = 1; i<=5; i++){
+                this.pagenumber.push({'index' : i, 'isactive' : null});
+            }
+            this.pagenumber[0].isactive = 'active';
             this.getCurrentpage(1);
+            this.forward();
+            this.backward();
+            this.loaded = true;
         })
     }
 
@@ -99,7 +116,7 @@ export class CustomersListComponent implements OnInit {
                 , cus_tax : this.addform.value.customer_code };
             this.customerarr.unshift(newcus);
             this.customerarr.pop();
-            this.bigArray.unshift(newcus);
+            this.rawArray.unshift(newcus);
             this.checked100 = false;
             this.addform.reset();
         }
@@ -113,21 +130,23 @@ export class CustomersListComponent implements OnInit {
             "cus_phone" : this.addform.value.customer_phone, "cus_email" : this.addform.value.customer_email,
             "cus_owner" : this.addform.value.customer_owner, "cus_address" : this.addform.value.customer_address,
             "cus_tax" : this.addform.value.customer_code};
-        this.getApiAddCustomer(JSON.stringify(cus_obj)).subscribe();
+        this.getApiAddCustomer(JSON.stringify(cus_obj)).subscribe(data => {
+            console.log(data);
+        });
     }
 
     //search for customer
     search() {
         if(this.searchform.value.customer_id != null || this.searchform.value.customer_name != null
-        || this.searchform.value.customer_email != null || this.searchform.value.customer_phone != null
-        || this.searchform.value.customer_owner != null || this.searchform.value.customer_code != null){
-            if(this.bigArray != null){
-                this.archiveArray = this.bigArray;
+            || this.searchform.value.customer_email != null || this.searchform.value.customer_phone != null
+            || this.searchform.value.customer_owner != null || this.searchform.value.customer_code != null){
+            if(this.rawArray != null){
+                this.archiveArray = this.rawArray;
             }
             this.searchCustomer();
         }
         else {
-            this.bigArray = this.archiveArray;
+            this.rawArray = this.archiveArray;
         }
     }
 
@@ -138,11 +157,11 @@ export class CustomersListComponent implements OnInit {
             "cus_owner" : this.searchform.value.customer_owner, "cus_tax" : this.searchform.value.customer_code};
         this.getApiSearchCustomer(JSON.stringify(cus)).subscribe(data =>{
             res = (data);
-            this.bigArray = JSON.parse(res);
-            var pagenum = Math.floor(this.bigArray.length / 10) + 1;
+            this.rawArray = JSON.parse(res);
+            var pagenum = Math.floor(this.rawArray.length / 10) + 1;
             this.pagearr = [];
             for(let i = 1; i<=pagenum; i++){
-                this.pagearr.push(i);
+                this.pagearr.push({'index' : i, 'isactive' : null});
             }
             this.getCurrentpage(1);
         })
@@ -198,8 +217,6 @@ export class CustomersListComponent implements OnInit {
         this.getApiUpdateCustomer( JSON.stringify(obj)).subscribe();
     }
 
-
-
     addcol1() {
         if (this.checked != null) {
             return true;
@@ -211,10 +228,10 @@ export class CustomersListComponent implements OnInit {
     //tick or untick all
     setTick(a){
         for(let i =0; i<this.customerarr.length; i++){
-            this.customerarr[i].ticked = a;
+            this.customerarr[i.toString()].ticked = a;
+            this.getindex(i);
         }
     }
-
 
     getApiAddCustomer(data){
         return this.http.post('https://sum4cp6813.execute-api.ap-southeast-1.amazonaws.com/testStage', data);
@@ -234,7 +251,7 @@ export class CustomersListComponent implements OnInit {
 
     //support dropdown
     dropdo(){
-        this.checkdrop = true;
+
         if(this.drop == 'block'){
             this.drop = 'none';
         }
@@ -244,11 +261,82 @@ export class CustomersListComponent implements OnInit {
     }
 
     //support dropdown
-    changeit(){
-        if(this.drop == 'block' && this.checkdrop == false){
+    closedrop(){
+        if(this.drop == 'block'){
             this.drop = 'none';
         }
-        this.checkdrop = false;
     }
+
+    cancelAdd(){
+        this.checked100 = false;
+        this.addform.reset();
+    }
+
+    cancelUpdate(mycustomer){
+        mycustomer.allowedit = false;
+        mycustomer.ticked = false;
+    }
+
+    // showmodal(){
+    //     this.mdb.show(AddCustomerComponent, 'style="background-color: #00b0ff"');
+    // }
+
+    openaddcustomer(){
+        this.router.navigate(['/add']);
+    }
+
+    forward(){
+        if(this.pagenumber[this.pagenumber.length - 1].index < this.pagearr.length){
+            var g;
+            g = this.pagenumber[4].index;
+            this.pagenumber = [];
+            for(let i = 0; i < 5 ; i++){
+                this.pagenumber.push(this.pagearr[g + i]);
+            }
+        }
+    }
+
+    backward(){
+        if(this.pagenumber[0].index != 1){
+            var g;
+            g = this.pagenumber[0].index;
+            this.pagenumber = [];
+            for(let i=2; i <= 6; i++){
+                this.pagenumber.push(this.pagearr[g - i]);
+            }
+            this.pagenumber.reverse();
+        }
+    }
+
+    firstpage(){
+        if(this.pagenumber[0].index > 1){
+            this.pagenumber = [];
+            for(let i=0; i<5; i++){
+                this.pagenumber.push(this.pagearr[i]);
+            }
+
+        }
+    }
+
+    lastpage(){
+        if(this.pagenumber[4].index < this.pagearr.length){
+            this.pagenumber = [];
+            for(let i=0; i<5; i++){
+                this.pagenumber.push(this.pagearr[this.pagearr.length-1-i]);
+
+            }
+            this.pagenumber.reverse();
+        }
+    }
+
+    // padding(i){
+    //     if(i > 10){
+    //         return '0.5rem 0.75rem';
+    //     }
+    //     else{
+    //         return '0.5rem';
+    //     }
+    //
+    // }
 
 }

@@ -1,11 +1,10 @@
-<p>
+<table-comp col=5 [arr]="['name','email','index','phone','code']" [data]="cusarr"></table-comp>
 
-  <div *ngFor="let cus of cusarr;let i = index">
-  <td><input  class="my-input" style="width: 80px" type="text" [name]="'name'+ i" [(ngModel)]="cusarr[i].id" ></td>
+<button-comp content="Hello"></button-comp>
+<div style="width:200px">
+<dropdown-comp content="Hello"></dropdown-comp>
 
 </div>
-
-
-
-
-
+<div style="width:600px">
+<custom-input labelName="Username"></custom-input>
+</div>

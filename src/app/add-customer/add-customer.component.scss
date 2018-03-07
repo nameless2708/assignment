@@ -79,6 +79,7 @@ body {
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
 }
+
 .form-horizontal .form-group {
   margin-left: 0;
   margin-right: 0;
@@ -87,16 +88,32 @@ body {
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
 }
+.col-form-label{
+  padding-left:0px;
+  margin-top: 10px;
+  padding-right: 0px;
+  font-size: 14px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #effcdb;
 
-@media screen and (min-width: 768px) {
-  #adv-search {
-    width: 500px;
-    margin: 0 auto;
-  }
-  .dropdown.dropdown-lg {
-    position: static !important;
-  }
-  .dropdown.dropdown-lg .dropdown-menu {
-    min-width: 500px;
-  }
+}
+
+.form-control{
+  margin-bottom: 5px;
+  padding-bottom: 0px;
+  border-bottom: 1px solid #effcdb;
+  trainsition : all 0s;
+}
+
+.form-control:hover{
+  border-bottom: 1px solid #afafa6;
+}
+
+.form-sm{
+  padding-left:55px;
+  padding-right:55px;
+}
+
+.col-9{
+  padding-left:0px;
 }

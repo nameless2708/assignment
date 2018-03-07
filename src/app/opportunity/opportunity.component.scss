@@ -1,0 +1,105 @@
+.row{
+  margin-top : 5px;
+  margin-bottom : 10px;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.custom-input{
+  width:100%;
+  border-bottom: none ;
+}
+
+.custom-input:focus {
+  border-bottom : none !important;
+  outline: none !important;
+  -webkit-box-shadow: none !important;
+}
+
+.label {
+  max-width : 28% !important;
+  padding-top:10px;
+  padding-left:5px;
+  padding-right:0px;
+  font-family: Arial;
+  font-size:14px;
+
+}
+
+.mydatepicker{
+  border: 1px groove rgba(124, 117, 128, 0.21);
+  height: 40px;
+  width: 140px;
+  margin-left:10px;
+  margin-right:10px;
+}
+
+.input{
+  border-bottom: none !important;
+}
+
+.search-btn {
+  width:100px;
+  height:35px;
+  background-color: #42a2eb;
+  border-radius: 4px;
+  border-color: #42a2eb;
+  color: #FFFFFF;
+  border:1px solid;
+  margin-left : 50px;
+}
+
+.search-btn:hover {
+  background-color: #2794e8;
+}
+
+.clear-btn{
+  margin-left:20px;
+  width: 100px;
+  height: 35px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  color: #42a2eb;
+  border:none;
+}
+
+.my-button{
+  width:110px;
+  height:35px;
+  margin-left:10px;
+  margin-top:10px;
+  background-color: #FFFFFF;
+  color : #bababa;
+  border:1px groove #f4f4f4;
+}
+
+.my-button:hover{
+  background-color: #f8f9fa;
+  color: #000000;
+}
+
+
+/* width */
+#mycol::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+#mycol::-webkit-scrollbar-track {
+  background: #ffffff;
+
+}
+
+/* Handle */
+#mycol::-webkit-scrollbar-thumb {
+  background: #ffffff;
+  border-radius:10px;
+}
+
+/* Handle on hover */
+#mycol::-webkit-scrollbar-thumb:hover {
+  background: gainsboro;
+}
+
+.search-input{
+
+}

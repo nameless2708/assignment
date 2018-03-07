@@ -1,6 +1,5 @@
-
-
 <div class="row" style="background-color: #f4f4f4">
+
     <div class="col">
         <div class="btn-group" dropdown>
             <button dropdownToggle type="button" class="btn-custom  waves-light"  mdbRippleRadius>
@@ -28,223 +27,202 @@
             </div>
         </div>
 
-        <div class="btn-group" style="width:25%; background-color: #ffffff; height:45px;" >
+        <div class="btn-group" style="width:30%; background-color: #ffffff; height:45px;" (clickOutside)=closedrop() (keydown.esc)=closedrop()>
             <div style="width: 40px; height:40px; padding-top:10px; padding-left:10px">
-            <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/14173-200.png" width="20px" height="20px"/>
+                <img src="https://d30y9cdsu7xlg0.cloudfront.net/png/14173-200.png" width="20px" height="20px"/>
             </div>
             <input type="text" style="border-bottom:none ;margin-left:10px" placeholder="Tìm kiếm" >
-            <div class="mydropdown" [formGroup]="searchform" ngForm>
-                <button class="mydropbtn" (click)="dropdo()" type="button">
-                    <img height="16px" width="20px" style="margin-left: 20px;background-color: #ffffff" src="https://image.flaticon.com/icons/svg/60/60995.svg"/>
-                </button>
-                <div class="mydropdown-content" id="myDropdown" (clickOutside)="changeit()" [style.display]="drop">
-                    <div class="row">
-                        <div class="col">
-                            Mã khách hàng
-                            <input type="text" formControlName="customer_id">
-                        </div>
-                        <div class="col">
-                            Tên khách hàng
-                            <input type="text" formControlName="customer_name">
-                        </div>
+            <button class="mydropbtn" (click)="dropdo()" type="button" style="width:20%">
+                <img height="16px" width="20px" style="margin-left: 20px;background-color: #ffffff" src="https://image.flaticon.com/icons/svg/60/60995.svg"/>
+            </button>
+            <div class="mydropdown-content" [style.display]="drop" ngForm [formGroup]="searchform">
+                <div class="row">
+                    <div class="col">
+                        Mã khách hàng
+                        <input type="text" formControlName="customer_id">
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            Điện thoại
-                            <input type="text" formControlName="customer_phone">
-                        </div>
-                        <div class="col">
-                            Email
-                            <input type="text" formControlName="customer_email">
-                        </div>
+                    <div class="col">
+                        Tên khách hàng
+                        <input type="text" formControlName="customer_name">
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            Chủ sở hữu
-                            <input type="text" formControlName="customer_owner">
-                        </div>
-                        <div class="col">
-                            Mã số thuế
-                            <input type="text" formControlName="customer_code">
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        Điện thoại
+                        <input type="text" formControlName="customer_phone">
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            <button type="submit" (click)="search()" class="btn btn-primary waves-light" style="padding-top:5px; margin-left:15px; max-width: 112px; max-height:46px">Tìm kiếm</button>
-                        </div>
-                        <div class="col">
-                            <button type="button" (click)="clearsearchform()" class="btn btn-primary waves-light" style="padding-top:5px; margin-left:10px; max-width: 112px; max-height:46px">Xóa bỏ</button>
-                        </div>
+                    <div class="col">
+                        Email
+                        <input type="text" formControlName="customer_email">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        Chủ sở hữu
+                        <input type="text" formControlName="customer_owner">
+                    </div>
+                    <div class="col">
+                        Mã số thuế
+                        <input type="text" formControlName="customer_code">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button type="submit" (click)="search()" class="btn btn-primary waves-light" >Tìm kiếm</button>
+                    </div>
+                    <div class="col">
+                        <button type="button" (click)="clearsearchform()" class="btn btn-primary waves-light" >Xóa bỏ</button>
                     </div>
                 </div>
             </div>
-
-
         </div>
-
-        <!--<div class="btn-group" dropdown style="height: 48px ">-->
-        <!---->
-        <!--&lt;!&ndash;<div style="border: 1px groove #f4f4f4;padding-right: 5px; padding-left: 20px; padding-top: 5px; padding-bottom: 5px; width: 350px; background-color: #FFFFFF">&ndash;&gt;-->
-
-        <!--&lt;!&ndash;<form [formGroup]="searchform" (ngSubmit)="search()" style="width: 330px; text-align: left">&ndash;&gt;-->
-        <!--&lt;!&ndash;<img src="https://d30y9cdsu7xlg0.cloudfront.net/png/14173-200.png" width="20px" height="20px"/>&ndash;&gt;-->
-        <!--&lt;!&ndash;<input style="border : none; width: 230px; background-color: #FFFFFF" type="text" placeholder="Tìm kiếm khách hàng" formControlName="data" />&ndash;&gt;-->
-        <!--&lt;!&ndash;<button dropdownToggle style="border: none; box-shadow: none;padding-bottom: 0px; padding-top: 0px; float: inside;height: 30px; background-color: #FFFFFF " type="button" class="btn btn-custom dropdown-toggle waves-light"  mdbRippleRadius>&ndash;&gt;-->
-        <!--&lt;!&ndash;<img height="16px" width="20px" style="margin-left: 20px;background-color: #ffffff" src="https://image.flaticon.com/icons/svg/60/60995.svg"/>&ndash;&gt;-->
-        <!--&lt;!&ndash;</button>&ndash;&gt;-->
-        <!--&lt;!&ndash;</form>&ndash;&gt;-->
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-
-        <!--&lt;!&ndash;<div class="dropdown-menu dropdown-primary" >&ndash;&gt;-->
-        <!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
-        <!--&lt;!&ndash;<div class="col">&ndash;&gt;-->
-        <!--&lt;!&ndash;Mã khách hàng&ndash;&gt;-->
-        <!--&lt;!&ndash;<input type="text">&ndash;&gt;-->
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-        <!--&lt;!&ndash;<div class="col">&ndash;&gt;-->
-        <!--&lt;!&ndash;Tên khách hàng&ndash;&gt;-->
-        <!--&lt;!&ndash;<input type="text">&ndash;&gt;-->
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-
-        <!--</div>-->
         <div class="btn-group" >
-            <div style="border: 1px groove #f4f4f4; width: 150px; height:45px">
-                <button style="width:30%; height:100%;background-color: #FFFFFF; float:left; border: none" ><img src="https://cdn3.iconfinder.com/data/icons/edition/100/pen_paper_2-512.png" width="70%" height="60%" style="float:left"></button>
-                <button (click)="addNewcol()" style="width:70%; height:100%;background-color: #FFFFFF; float:right; border: none; border-left: 2px groove #f4f4f4; font-size: 20px"> Nhập</button>
+            <div style="border: 1px groove #f4f4f4; width: 130px; height:38px">
+                <button class="addbtn" (click)="openaddcustomer()" ><img src="https://cdn3.iconfinder.com/data/icons/edition/100/pen_paper_2-512.png" width="70%" height="60%" style="float:left"></button>
+                <button class="addbtn2" (click)="addNewcol()"> Nhập</button>
             </div>
         </div>
         <div class="btn-group" >
-            <div style="border: 1px groove #f4f4f4; width: 150px; height:45px">
-                <button (click)="allowedit()" style="width:100%; height:100%;background-color: #FFFFFF; float:right; border: none; font-size: 20px">Sửa</button>
+            <div style="border: 1px groove #f4f4f4; width: 130px; height:38px">
+                <button (click)="allowedit()" style="width:100%; height:100%;background-color: #FFFFFF; float:right; border: none; font-size: 15px">Sửa</button>
             </div>
         </div>
 
         <div class="btn-group" dropdown>
-
-            <button dropdownToggle type="button" class="btn btn-custom2 dropdown-toggle waves-light"  mdbRippleRadius>
-                <img src="https://image.flaticon.com/icons/png/512/61/61050.png" width="20px" height="20px"/>
-                <b class="mytext">Thêm cột</b><img height="20px" width="25px" style="margin-left: 10px" src="https://image.flaticon.com/icons/svg/60/60995.svg"/>
-            </button>
+            <div style="border: 1px groove #f4f4f4;">
+                <button dropdownToggle type="button" class="btn btn-custom2" style="width: 140px; height:35px; padding-top:5px">
+                    <img src="https://image.flaticon.com/icons/png/512/61/61050.png" width="20px" height="20px"/>
+                    <b class="mytext">Thêm cột</b><img height="20px" width="25px" style="margin-left: 10px" src="https://image.flaticon.com/icons/svg/60/60995.svg"/>
+                </button>
+            </div>
             <div class="dropdown-menu dropdown-primary">
                 <input [(ngModel)]="checked" type="checkbox" id="a1"><label for="a1" class="label-checkbox">New column 1</label>
                 <input [(ngModel)]="checked1" type="checkbox" id="a2"><label for="a2" class="label-checkbox">New column 2</label>
                 <input [(ngModel)]="checked2" type="checkbox" id="a3"><label for="a3" class="label-checkbox">New column 3</label>
                 <input [(ngModel)]="checked3" type="checkbox" id="a4"><label for="a4" class="label-checkbox">New column 4</label>
             </div>
-
         </div>
     </div>
 </div>
 
-<div class="row" style="background-color: #FFFFFF">
-    <div class="col">
-        <table class="table table-sm table-hover" >
-            <thead>
-            <tr style="text-align: center">
-                <th>
-                    <input type="checkbox" id="chkSelectAll" (change)="setTick(tickall)" [(ngModel)]="tickall">
-                    <label  for="chkSelectAll" class="label-checkbox" name="fieldName" ngDefaultControl ></label>
-                </th>
+<div class="row" style="background-color: #FFFFFF; overflow: scroll; height:435px">
 
-                <th style="min-width: 110px;"><b>Mã khách hàng</b></th>
-                <th><b>Tên khách hàng</b></th>
-                <th><b>Số điện thoại</b></th>
-                <th><b>Địa chỉ Email</b></th>
-                <th><b>Chủ sở hữu </b></th>
-                <th><b>Địa chỉ văn phòng</b></th>
-                <th><b>Chi tiết</b></th>
-                <th *ngIf="checked"><b>New col 1</b></th>
-                <th *ngIf="checked1"><b>New col 2</b></th>
-                <th *ngIf="checked2"><b>New col 3</b></th>
-                <th *ngIf="checked3"><b>New col 4</b></th>
-            </tr>
-            </thead>
-            <tbody >
-            <form *ngIf="checked100" style="display: table-row; text-align: center; padding: 0px 0px 0px 0px; " [formGroup]="addform" (ngSubmit)="addcustomer()">
-                <th scope="row"  >
-                    <input  type="checkbox" id="n" >
-                    <label for="n" class="label-checkbox"></label>
-                </th>
-                <td><input type="text" formControlName="customer_id" class="my-input" style="width: 130px; position:inherit; float: left"></td>
-                <td><input type="text" formControlName="customer_name" class="my-input" style="width: 130px; position:inherit;float: left"></td>
-                <td><input type="text" formControlName="customer_phone"  class="my-input" style="width: 110px; position:inherit"></td>
-                <td><input type="text" formControlName="customer_email" class="my-input" style="width: 130px; position:inherit" ></td>
-                <td><input type="number" formControlName="customer_owner" class="my-input" style="width: 40px"></td>
-                <td><input type="text" formControlName="customer_address" class="my-input" style="width: 130px; position:inherit"></td>
-                <td><input type="text" formControlName="customer_code" class="my-input"  style="width: 130px; position:inherit" ></td>
-                <td *ngIf="checked">
-                    <input type="text" formControlName="customer_addcol" class="my-input" >
-                </td>
-                <button type="submit" style="display: none"></button>
-            </form>
+    <div class="container"  style="min-width:105% ;margin-left: 0px;margin-right: 0px; padding-left: 0px;padding-right: 0px">
+        <div class="col" style="width:100%">
+            <!--<table-comp row=10 col=6 [data]="customerarr"></table-comp>-->
+            <table class="table table-sm table-hover" style="width:100%" *ngIf="loaded" >
+                <thead>
+                <tr style="text-align: center; width:100%" >
+                    <th>
+                        <input type="checkbox" id="chkSelectAll" (change)="setTick(tickall)" [(ngModel)]="tickall">
+                        <label  for="chkSelectAll" class="label-checkbox" ngDefaultControl ></label>
+                    </th>
+                    <th style="min-width: 14%;"><b>Mã khách hàng</b></th>
+                    <th style="min-width: 14%;"><b>Tên khách hàng</b></th>
+                    <th style="min-width: 14%;"><b>Số điện thoại</b></th>
+                    <th style="min-width: 14%;"><b>Địa chỉ Email</b></th>
+                    <th style="min-width: 14%;"><b>Chủ sở hữu </b></th>
+                    <th style="min-width: 14%;"><b>Địa chỉ văn phòng</b></th>
+                    <th style="min-width: 14%;"><b>Chi tiết</b></th>
+                    <th style="min-width: 14%;" *ngIf="checked"><b>New col 1</b></th>
+                    <th style="min-width: 14%;" *ngIf="checked1"><b>New col 2</b></th>
+                    <th style="min-width: 14%;" *ngIf="checked2"><b>New col 3</b></th>
+                    <th style="min-width: 14%;" *ngIf="checked3"><b>New col 4</b></th>
+                </tr>
+                </thead>
+                <tbody >
+                <form *ngIf="checked100" style="display: table-row; text-align: center; padding: 0px 0px 0px 0px; " [formGroup]="addform" (ngSubmit)="addcustomer()" (keydown.esc)="cancelAdd()">
+                    <th scope="row"  >
+                        <input  type="checkbox" id="n" >
+                        <label for="n" class="label-checkbox"></label>
+                    </th>
+                    <td><input type="text" formControlName="customer_id" class="my-input" style="width: 130px; position:inherit; float: left"></td>
+                    <td><input type="text" formControlName="customer_name" class="my-input" style="width: 130px; position:inherit;float: left"></td>
+                    <td><input type="text" formControlName="customer_phone"  class="my-input" style="width: 110px; position:inherit"></td>
+                    <td><input type="text" formControlName="customer_email" class="my-input" style="width: 130px; position:inherit" ></td>
+                    <td><input type="number" formControlName="customer_owner" class="my-input" style="width: 40px"></td>
+                    <td><input type="text" formControlName="customer_address" class="my-input" style="width: 130px; position:inherit"></td>
+                    <td><input type="text" formControlName="customer_code" class="my-input"  style="width: 130px; position:inherit" ></td>
+                    <td *ngIf="checked">
+                        <input type="text" formControlName="customer_addcol" class="my-input" >
+                    </td>
 
-            </tbody >
-            <tbody  *ngFor="let mycustomer of customerarr;let num = index">
-            <tr *ngIf="!mycustomer.allowedit" style=" text-align: center">
-                <th scope="row" style="width:40px">
-                    <input type="checkbox" id="a + {{num}}" [(ngModel)]="mycustomer.ticked" [ngModelOptions]="{standalone: true}" (change)="getindex(num)">
-                    <label for="a + {{num}}" class="label-checkbox"></label>
-                </th>
-                <td class="my-td" style="width: 120px; position:inherit">{{mycustomer.cus_code}}</td>
-                <td class="my-td" style="text-align:left; text-overflow: ellipsis;width: 185px; position:inherit">{{mycustomer.cus_name}}</td>
-                <td class="my-td" style="width: 185px; position:inherit">{{mycustomer.cus_phone}}</td>
-                <td class="my-td" style="width: 185px; position:inherit">{{mycustomer.cus_email}}</td>
-                <td class="my-td" style="width: 185px; position:inherit">{{mycustomer.cus_owner}}</td>
-                <td class="my-td" style="text-align:left;width: 185px; position:inherit">{{mycustomer.cus_address}}</td>
-                <td class="my-td" style="text-align:left;width: 185px; position:inherit">{{mycustomer.cus_tax}}</td>
-            </tr>
+                    <button type="submit" style="display: none"></button>
+                </form>
 
-            <form  *ngIf="mycustomer.allowedit" [(formGroup)]="editArr[num.toString()]" (ngSubmit)="editcustomer(num.toString())" style=" text-align: center; display: table-row">
-                <th scope="row">
-                    <input type="checkbox" id="{{num}}" [(ngModel)]="mycustomer.ticked"  [ngModelOptions]="{standalone: true}" >
-                    <label for="{{num}}" class="label-checkbox"></label>
-                </th>
-                <td><input [readonly]="!mycustomer.allowedit" class="my-input" style="width: 80px; position:inherit;" type="text" formControlName="customer_id"  [value]="mycustomer.cus_code" ></td>
-                <td><input [readonly]="!mycustomer.allowedit" class="my-input" style="width: 80px; position:inherit; text-align:left" type="text" formControlName="customer_name"  [value]="mycustomer.cus_name" ></td>
-                <td><input [readonly]="!mycustomer.allowedit" class="my-input" style="width: 80px; position:inherit" type="text" formControlName="customer_phone"  [value]="mycustomer.cus_phone" ></td>
-                <td><input [readonly]="!mycustomer.allowedit" class="my-input" style="width: 80px; position:inherit" type="text" formControlName="customer_email"  [value]="mycustomer.cus_email" ></td>
-                <td><input [readonly]="!mycustomer.allowedit" class="my-input" style="width: 80px; position:inherit" type="number" formControlName="customer_owner"  [value]="mycustomer.cus_owner" ></td>
-                <td><input [readonly]="!mycustomer.allowedit" class="my-input" style="width: 80px; position:inherit; text-align:left" type="text" formControlName="customer_address"  [value]="mycustomer.cus_address" ></td>
-                <td><input [readonly]="!mycustomer.allowedit" class="my-input" style="width: 80px; position:inherit; text-align:left" type="text" formControlName="customer_code"  [value]="mycustomer.cus_tax" ></td>
-                <button type="submit" style="display: none"></button>
-            </form>
-            </tbody>
-        </table>
-        <nav class="my-4" style=" float:right">
-            <ul class="pagination pagination-circle pg-blue mb-0">
+                </tbody >
+                <tbody >
+                <ng-container *ngFor="let mycustomer of customerarr;let num = index">
+                    <tr *ngIf="!mycustomer.allowedit" style=" text-align: center; font-family: Arial" [class]="mycustomer.ticked == true ? 'table-active':''">
+                        <th scope="row" style="width:40px">
+                            <input type="checkbox" id="a + {{num}}" [(ngModel)]="mycustomer.ticked" [ngModelOptions]="{standalone: true}" (change)="getindex(num)">
+                            <label for="a + {{num}}" class="label-checkbox"></label>
+                        </th>
+                        <td class="my-td" style="width: 14%; position:inherit; text-align: left">{{mycustomer.cus_code}}</td>
+                        <td class="my-td" style="text-align:left; text-overflow: ellipsis;width: 14%; position:inherit">{{mycustomer.cus_name}}</td>
+                        <td class="my-td" style="width: 14%; text-align:left;position:inherit">{{mycustomer.cus_phone}}</td>
+                        <td class="my-td" style="width: 14%; position:inherit">{{mycustomer.cus_email}}</td>
+                        <td class="my-td" style="width: 14%; position:inherit">{{mycustomer.cus_owner}}</td>
+                        <td class="my-td" style="text-align:left;width: 14%; position:inherit">{{mycustomer.cus_address}}</td>
+                        <td class="my-td" style="text-align:left;width: 14%; position:inherit">{{mycustomer.cus_tax}}</td>
+                    </tr>
 
-                <!--First-->
-                <li class="page-item"><a class="page-link" mdbRippleRadius>First</a></li>
+                    <form  *ngIf="mycustomer.allowedit" [(formGroup)]="editArr[num.toString()]" (ngSubmit)="editcustomer(num.toString())" style=" text-align: center; display: table-row" (keydown.esc)="cancelUpdate(mycustomer)">
+                        <td>
+                            <input type="checkbox" id="{{num}}" [(ngModel)]="mycustomer.ticked"  [ngModelOptions]="{standalone: true}" >
+                            <label for="{{num}}" class="label-checkbox"></label>
+                        </td>
+                        <td class="edit-td"><input class="my-input" style="width: 100%; position:inherit;" type="text" formControlName="customer_id" [value]="mycustomer.cus_code"></td>
+                        <td class="edit-td"><input class="my-input" style="width: 100%; position:inherit; text-align:left" type="text" formControlName="customer_name" [value]="mycustomer.cus_name" ></td>
+                        <td class="edit-td"><input class="my-input" style="width: 100%; position:inherit" type="text" formControlName="customer_phone" [value]="mycustomer.cus_phone" ></td>
+                        <td class="edit-td"><input class="my-input" style="width: 100%; position:inherit; text-align: center" type="text" formControlName="customer_email" [value]="mycustomer.cus_email" ></td>
+                        <td class="edit-td"><input class="my-input" style="width: 100%; position:inherit; text-align: center" type="number" formControlName="customer_owner" [value]="mycustomer.cus_owner" ></td>
+                        <td class="edit-td"><input class="my-input" style="width: 100%; position:inherit; text-align:left" type="text" formControlName="customer_address" [value]="mycustomer.cus_address" ></td>
+                        <td class="edit-td"><input class="my-input" style="width: 100%; position:inherit; text-align:left" type="text" formControlName="customer_code" [value]="mycustomer.cus_tax" ></td>
+                        <button type="submit" style="display: none"></button>
+                    </form>
+                </ng-container>
+                </tbody>
 
-                <!--Arrow left-->
-                <li class="page-item disabled">
-                    <a class="page-link" mdbRippleRadius aria-label="Previous">
-                        <span aria-hidden="true">«</span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                </li>
 
-                <!--Numbers-->
-                <div *ngFor="let page of pagearr">
-                    <li class="page-item"><a class="page-link" (click)="getCurrentpage(page)" mdbRippleRadius >{{page}}</a></li>
-                </div>
-                <!--Arrow right-->
-                <li class="page-item">
-                    <a class="page-link" mdbRippleRadius aria-label="Next">
-                        <span aria-hidden="true">»</span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                </li>
-
-                <!--First-->
-                <li class="page-item"><a class="page-link">Last</a></li>
-
-            </ul>
-        </nav>
+            </table>
+            <div style="height:473px; width:100%; background-color: #ffffff" *ngIf="!loaded">
+                <mdb-spinner spinnerType="big" spinnerColor="blue" style="display:-moz-inline-block"></mdb-spinner>
+            </div>
+        </div>
     </div>
+</div>
+
+<div class="row" style="display:block" >
+    <nav class="my-4" style="float:right;">
+        <ul class="pagination pagination-circle pg-blue mb-0 ">
+            <!--First-->
+            <li class="page-item"><a class="page-link" mdbRippleRadius (click)="firstpage()">First</a></li>
+            <!--Arrow left-->
+            <li class="page-item">
+                <a class="page-link" mdbRippleRadius aria-label="Previous" (click)="backward()">
+                    <span aria-hidden="true">«</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+            <!--Numbers-->
+            <div *ngFor="let page of pagenumber; let i = index">
+                <li class="page-item {{page.isactive}}"><a class="page-link" style="width:30px;" (click)="getCurrentpage(page.index)" mdbRippleRadius [style.padding]="(page.index < 10)?'0.5rem 0.75rem':'0.5rem'">{{page.index}}</a></li>
+            </div>
+            <!--Arrow right-->
+            <li class="page-item">
+                <a class="page-link" mdbRippleRadius aria-label="Next" (click)="forward()">
+                    <span aria-hidden="true">»</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+            <!--First-->
+            <li class="page-item"><a class="page-link" (click)="lastpage()">Last</a></li>
+        </ul>
+    </nav>
 
 </div>
+
+
 
 

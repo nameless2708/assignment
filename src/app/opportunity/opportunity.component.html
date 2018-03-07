@@ -1,0 +1,109 @@
+<div class="row" style="background-color: #ffffff; margin-top: 0px; margin-bottom:0px; border-bottom : none; height:100%;">
+
+    <div class="col" style="max-width: 26%" >
+        <div class="row" id="mycol" style="overflow-y : scroll; padding-left:20px; height:548px;margin-bottom: 0px">
+            <div class="row" style="width:100%">
+                <input type="text" placeholder="&#xF002; Tìm kiếm" style="font-family: Arial, FontAwesome;margin-left:15px" class="custom-input">
+            </div>
+            <div class="row" style="width:100%">
+                <div class="label col">
+                    Số cơ hội
+                </div>
+                <div class="col">
+                    <input class="custom-input" type="text">
+                </div>
+            </div>
+            <div class="row" style="width:100%">
+                <div class="label col">
+                    Người tạo
+                </div>
+                <div class="col">
+                    <input class="custom-input" type="text">
+                </div>
+            </div>
+            <div class="row" style="width:100%">
+                <div class="label col">
+                    Tên cơ hội
+                </div>
+                <div class="col">
+                    <input class="custom-input" type="text">
+                </div>
+            </div>
+            <div class="row" style="width:100%">
+                <div class="label col">
+                    Khách hàng
+                </div>
+                <div class="col">
+                    <input class="custom-input" type="text">
+                </div>
+            </div>
+            <div class="row" style="width:100%">
+                <div class="label col">
+                    Mã hàng hóa
+                </div>
+                <div class="col">
+                    <input class="custom-input" type="text">
+                </div>
+            </div>
+            <div class="row" style="width:100%">
+                <div class="label col">
+                    Giai đoạn
+                </div>
+                <div class="col">
+                    <input class="custom-input" type="text">
+                </div>
+            </div>
+            <div class="row" style="width:100%; border-bottom : none">
+                <div class=" row" style="padding-left:30px; border-bottom : none; font-family: Arial; font-size: 14px">
+                    Khoảng ngày kỳ vọng
+                </div>
+                <div class="row" style="margin-left:5px; border-bottom: none">
+                    <mdb-date-picker class="mydatepicker" placeholder="Start date" [options]="myOption" [(ngModel)]="model" style="border-bottom : none;"></mdb-date-picker>
+                    _
+                    <mdb-date-picker class="mydatepicker" placeholder="End date" [options]="myOption" [(ngModel)]="model" style="border-bottom : none"></mdb-date-picker>
+                </div>
+            </div>
+            <div class="row" style="width:100%; border-bottom : none">
+                <div class=" row" style="padding-left:30px; border-bottom : none; font-family: Arial; font-size: 14px">
+                    Khoảng ngày kết thúc
+                </div>
+                <div class="row" style="margin-left:5px; border-bottom: none">
+                    <mdb-date-picker class="mydatepicker" placeholder="Start date" [options]="myOption" [(ngModel)]="model" style="border-bottom : none;"></mdb-date-picker>
+                    _
+                    <mdb-date-picker class="mydatepicker" placeholder="End date" [options]="myOption" [(ngModel)]="model" style="border-bottom : none"></mdb-date-picker>
+                </div>
+            </div>
+            <div class="row" style="width:100%; border-bottom : none" >
+                <div class=" row" style="padding-left:30px; border-bottom : none; font-family: Arial; font-size: 14px">
+                    Khoảng ngày bắt đầu
+                </div>
+                <div class="row" style="margin-left:5px; border-bottom: none">
+                    <mdb-date-picker class="mydatepicker" placeholder="Start date" [options]="myOption" [(ngModel)]="model" style="border-bottom : none;"></mdb-date-picker>
+                    _
+                    <mdb-date-picker class="mydatepicker" placeholder="End date" [options]="myOption" [(ngModel)]="model" style="border-bottom : none"></mdb-date-picker>
+                </div>
+            </div>
+
+        </div>
+        <div class="row" style=" margin-bottom: 0px; border-bottom: none ">
+            <button class="search-btn">Tìm kiếm</button>
+            <button class="clear-btn">Xóa bỏ</button>
+        </div>
+
+    </div>
+
+
+    <div class="col" style="width:75%">
+        <div class="row" style="background-color: #f4f4f4; height:10%; margin-top:0px;">
+            <button class="my-button">
+                Xuất khẩu
+            </button>
+            <button class="my-button">
+                Nhập khẩu
+            </button>
+        </div>
+        <table-comp [data]="data" col=5 row=10 ></table-comp>
+    </div>
+</div>
+
+
