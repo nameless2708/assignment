@@ -10,29 +10,57 @@ export class AddCustomerComponent implements OnInit {
 
     addform : FormGroup;
     errormsg : string;
+    myarr = [];
+
+
+    onchanging(data){
+        var label;
+        var key;
+        label = data.label;
+        for(let i=0; i<this.myarr.length; i++){
+            if (label == this.myarr[i].value){
+                key = this.myarr[i].key;
+            }
+        }
+        this.addform.controls[key].setValue(data.value);
+    }
+
 
     constructor(private formbuilder : FormBuilder) {
+        var arr = [];
+        arr[0] = {key : 'customer_owner', value : 'Chủ sở hữu'};
+        arr[1] = {key : 'customer_code', value : 'Mã khách hàng'};
+        arr[2] = {key : 'customer_name', value : 'Tên khách hàng'};
+        arr[3] = {key : 'customer_phone', value : 'Số điện thoại'};
+        arr[4] = {key : 'customer_email', value : 'Địa chỉ email'};
+        arr[5] = {key : 'customer_taxcode', value : 'Mã số thuế'};
+        arr[6] = {key : 'customer_address', value : 'Địa chỉ văn phòng'};
+        arr[7] = {key : 'customer_website', value : 'Website'};
+        arr[8] = {key : 'customer_shared', value : 'Chia sẻ'};
+        arr[9] = {key : 'customer_contact', value : 'Người liên hệ'};
+        this.myarr = arr;
+
         this.addform = this.formbuilder.group({
-            customer_owner : ['', Validators.compose([Validators.required])],
-            customer_code: ['', Validators.compose([Validators.required])],
-            customer_name: ['', Validators.compose([Validators.required])],
-            customer_phone: ['', Validators.compose([Validators.required, Validators.pattern('(09|01[2|6|8|9])+([0-9]{8})\\b')])],
-            customer_email: ['', Validators.compose([Validators.required, Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)])],
-            customer_taxcode: ['', Validators.compose([Validators.required])],
-            customer_address: ['', Validators.compose([Validators.required])],
-            customer_website: ['', Validators.compose([Validators.required])],
-            customer_shared: ['', Validators.compose([Validators.required])],
-            customer_contact: ['', Validators.compose([Validators.required])],
-            customer_position: ['', Validators.compose([Validators.required])],
-            customer_gender: ['', Validators.compose([Validators.required])],
-            customer_cellphone: ['', Validators.compose([Validators.required])],
-            customer_telephone: ['', Validators.compose([Validators.required])],
-            customer_contactemail: ['', Validators.compose([Validators.required])],
-            customer_contactaddress: ['', Validators.compose([Validators.required])],
-            customer_birthday: [new Date()],
-            customer_nickchat: ['', Validators.compose([Validators.required])],
-            customer_joindate: [new Date(), Validators.compose([Validators.required])],
-            customer_creditcard: ['', Validators.compose([Validators.required])],
+            'Chủ sở hữu' : ['', Validators.compose([Validators.required])],
+            'Mã khách hàng' : ['', Validators.compose([Validators.required])],
+            'Tên khách hàng' : ['', Validators.compose([Validators.required])],
+            'Số điện thoại': ['', Validators.compose([Validators.required, Validators.pattern('(09|01[2|6|8|9])+([0-9]{8})\\b')])],
+            'Địa chỉ email': ['', Validators.compose([Validators.required, Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)])],
+            'Mã số thuế': ['', Validators.compose([Validators.required])],
+            'Địa chỉ văn phòng': ['', Validators.compose([Validators.required])],
+            'Website': ['', Validators.compose([Validators.required])],
+            'Chia sẻ': ['', Validators.compose([Validators.required])],
+            'Người liên hệ': ['', Validators.compose([Validators.required])],
+            'Chức vụ': ['', Validators.compose([Validators.required])],
+            'Giới tính': ['', Validators.compose([Validators.required])],
+            'Số di động': ['', Validators.compose([Validators.required])],
+            'Số máy bàn': ['', Validators.compose([Validators.required])],
+            'Email liên hệ': ['', Validators.compose([Validators.required])],
+            'Địa chỉ liên hệ': ['', Validators.compose([Validators.required])],
+            'Ngày sinh nhật': [new Date()],
+            'Nick chat': ['', Validators.compose([Validators.required])],
+            'Ngày tạo khách hàng': [new Date(), Validators.compose([Validators.required])],
+            'Tài khoản ngân hàng': ['', Validators.compose([Validators.required])],
             customer_bank: ['', Validators.compose([Validators.required])],
             customer_businessaddress: ['', Validators.compose([Validators.required])],
             customer_location: ['', Validators.compose([Validators.required])],
@@ -51,29 +79,18 @@ export class AddCustomerComponent implements OnInit {
     }
 
     submit(){
-        var arr = [];
-        arr[0] = {key : 'customer_owner', value : 'chủ sở hữu'};
-        arr[1] = {key : 'customer_code', value : 'mã khách hàng'};
-        arr[2] = {key : 'customer_name', value : 'tên khách hàng'};
-        arr[3] = {key : 'customer_phone', value : 'số điện thoại'};
-        arr[4] = {key : 'customer_email', value : 'địa chỉ email'};
-        arr[5] = {key : 'customer_taxcode', value : 'mã số thuế'};
-        arr[6] = {key : 'customer_address', value : 'địa chỉ văn phòng'};
-        arr[7] = {key : 'customer_website', value : 'website'};
-        arr[8] = {key : 'customer_shared', value : 'chia sẻ'};
-        arr[9] = {key : 'customer_contact', value : 'liên hệ'};
-        for(let i = arr.length-1; i>=0 ; i--){
-            if(this.addform.get(arr[i].key).hasError('pattern')){
-                this.errormsg = arr[i].value + ' không hợp lệ';
+        for(let i = this.myarr.length-1; i>=0 ; i--){
+            if(this.addform.get(this.myarr[i].value).hasError('pattern')){
+                this.errormsg = this.myarr[i].value + ' không hợp lệ';
             }
-            if(this.addform.get(arr[i].key).hasError('required')){
-                this.errormsg = arr[i].value + ' không được để trống';
+            if(this.addform.get(this.myarr[i].value).hasError('required')){
+                this.errormsg = this.myarr[i].value + ' không được để trống';
             }
-            if(this.addform.get(arr[i].key).hasError('maxlength')){
-                this.errormsg = arr[i].value + ' quá dài';
+            if(this.addform.get(this.myarr[i].value).hasError('maxlength')){
+                this.errormsg = this.myarr[i].value + ' quá dài';
             }
-            if(this.addform.get(arr[i].key).hasError('minlength')){
-                this.errormsg = arr[i].value + ' quá ngắn';
+            if(this.addform.get(this.myarr[i].value).hasError('minlength')){
+                this.errormsg = this.myarr[i].value + ' quá ngắn';
             }
         }
         alert(this.errormsg);

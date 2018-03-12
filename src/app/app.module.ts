@@ -20,7 +20,9 @@ import { InputComponent } from './input/input.component';
 import { TableComponent } from './table/table.component';
 import { ButtonComponent } from './button/button.component';
 import { DropdownComponent } from './dropdown/dropdown.component';
-import { InputEmailComponent } from './input-email/input-email.component';
+import { InputTextComponent } from './input-text/input-text.component';
+import { FilterComponent } from './filter/filter.component';
+import { ButtonsComponent } from './buttons/buttons.component';
 
 @NgModule({
     declarations: [
@@ -33,7 +35,9 @@ import { InputEmailComponent } from './input-email/input-email.component';
         TableComponent,
         ButtonComponent,
         DropdownComponent,
-        InputEmailComponent
+        InputTextComponent,
+        FilterComponent,
+        ButtonsComponent
     ],
     imports: [
         BrowserModule,

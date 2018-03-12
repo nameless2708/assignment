@@ -1,5 +1,5 @@
 <div>
-    <form [(formGroup)]="addform">
+    <form [formGroup]="addform">
         <div class="row" style="background-color: #f4f4f4; height:60px; position: sticky;top: 50px;right: 0;left: 0;z-index: 101; opacity: 1">
             <div class="col" >
                 <b class="title"> Tạo liên hệ</b>
@@ -14,326 +14,122 @@
 
         <div  class="row" style="background-color: #FFFFFF; margin-top:10px; font-family: ProximaNovaRegular,arial,sans-serif!important;">
             <div class="col" style="margin-top:50px">
-                <div class="form-sm row" >
-                    <label  class="col-3 col-form-label">Chủ sở hữu</label>
-                    <div class="col-9">
-                        <input class="form-control" type="text" >
-                    </div>
-                </div>
-                <div class="form-sm row">
-                    <label  class="col-3 col-form-label">Mã khách hàng</label>
-                    <div class="col-9">
-                        <input class="form-control" type="text" >
-                    </div>
-                </div>
-                <div class="form-sm row">
-                    <label  class="col-3 col-form-label">Tên khách hàng</label>
-                    <div class="col-9">
-                        <input class="form-control" type="text" >
-                    </div>
-                </div>
-                <div class="form-sm row">
-                    <label  class="col-3 col-form-label">Điện thoại</label>
-                    <div class="col-9">
-                        <input class="form-control" type="text" >
-                    </div>
-                </div>
-                <div class="form-sm row">
-                    <label  class="col-3 col-form-label">Email</label>
-                    <div class="col-9">
-                        <input class="form-control" type="text" >
-                    </div>
-                </div>
-                <div class="form-sm row">
-                    <label  class="col-3 col-form-label">Mã số thuế</label>
-                    <div class="col-9">
-                        <input class="form-control" type="text" >
-                    </div>
-                </div>
-                <div class="form-sm row">
-                    <label  class="col-3 col-form-label">Địa chỉ văn phòng</label>
-                    <div class="col-9">
-                        <input class="form-control" type="text" >
-                    </div>
-                </div>
-                <div class="form-sm row">
-                    <label  class="col-3 col-form-label">Website</label>
-                    <div class="col-9">
-                        <input class="form-control" type="text" >
-                    </div>
-                </div>
-                <div class="form-sm row">
-                    <label  class="col-3 col-form-label">Chia sẻ</label>
-                    <div class="col-9">
-                        <input class="form-control" type="text" >
-                    </div>
-                </div>
-
-
+                <app-input-email labelName="Chủ sở hữu" [group]="addform"></app-input-email>
+                <app-input-email labelName="Mã khách hàng" [group]="addform"></app-input-email>
+                <app-input-email labelName="Tên khách hàng" [group]="addform"></app-input-email>
+                <app-input-email labelName="Số điện thoại" [group]="addform"></app-input-email>
+                <app-input-email labelName="Địa chỉ email" [group]="addform"></app-input-email>
+                <app-input-email labelName="Mã số thuế" [group]="addform"></app-input-email>
+                <app-input-email labelName="Địa chỉ văn phòng" [group]="addform"></app-input-email>
+                <app-input-email labelName="Website" [group]="addform"></app-input-email>
+                <app-input-email labelName="Chia sẻ" [group]="addform"></app-input-email>
             </div>
+
             <div class="col" style="margin-top: 50px">
-                <div class="form-sm row">
-                    <label  class="col-3 col-form-label">Người liên hệ</label>
-                    <div class="col-9">
-                        <input class="form-control" type="text" >
-                    </div>
-                </div>
-                <div class="form-sm row">
-                    <label  class="col-3 col-form-label">Chức vụ</label>
-                    <div class="col-9">
-                        <input class="form-control" type="text" >
-                    </div>
-                </div>
-                <div class="form-sm row">
-                    <label  class="col-3 col-form-label">Giới tính</label>
-                    <div class="col-9">
-                        <input class="form-control" type="text" >
-                    </div>
-                </div>
-                <div class="form-sm row">
-                    <label  class="col-3 col-form-label">Số di động</label>
-                    <div class="col-9">
-                        <input class="form-control" type="text" >
-                    </div>
-                </div>
-                <div class="form-sm row">
-                    <label  class="col-3 col-form-label">Số máy bàn</label>
-                    <div class="col-9">
-                        <input class="form-control" type="text" >
-                    </div>
-                </div>
-                <div class="form-sm row">
-                    <label  class="col-3 col-form-label">Email liên hệ</label>
-                    <div class="col-9">
-                        <input class="form-control" type="text" >
-                    </div>
-                </div>
-                <div class="form-sm row">
-                    <label  class="col-3 col-form-label">Địa chỉ liên hệ</label>
-                    <div class="col-9">
-                        <input class="form-control" type="text" >
-                    </div>
-                </div>
-                <div class="form-sm row">
-                    <label  class="col-3 col-form-label">Ngày sinh nhật</label>
-                    <div class="col-9">
-                        <input class="form-control" type="text" >
-                    </div>
-                </div>
-                <div class="form-sm row">
-                    <label  class="col-3 col-form-label">Nick chat</label>
-                    <div class="col-9">
-                        <input class="form-control" type="text" >
-                    </div>
-                </div>
-                <div class="form-sm row">
-                    <label  class="col-3 col-form-label">Ngày tạo khách hàng</label>
-                    <div class="col-9">
-                        <input class="form-control" type="text" >
-                    </div>
-                </div>
-                <div class="form-sm row">
-                    <label  class="col-3 col-form-label">Tài khoản ngân hàng</label>
-                    <div class="col-9">
-                        <input class="form-control" type="text" >
-                    </div>
-                </div>
-
+                <app-input-email labelName="Người liên hệ" [group]="addform"></app-input-email>
+                <app-input-email labelName="Chức vụ" [group]="addform"></app-input-email>
+                <app-input-email labelName="Giới tính" [group]="addform"></app-input-email>
+                <app-input-email labelName="Số di động" [group]="addform"></app-input-email>
+                <app-input-email labelName="Số máy bàn" [group]="addform"></app-input-email>
+                <app-input-email labelName="Email liên hệ" [group]="addform"></app-input-email>
+                <app-input-email labelName="Địa chỉ liên hệ" [group]="addform"></app-input-email>
+                <app-input-email labelName="Ngày sinh nhật" [group]="addform"></app-input-email>
+                <app-input-email labelName="Nick chat" [group]="addform"></app-input-email>
+                <app-input-email labelName="Ngày tạo khách hàng" [group]="addform"></app-input-email>
+                <app-input-email labelName="Tài khoản ngân hàng" [group]="addform"></app-input-email>
+            </div>
+        </div>
+        <!--<div class="row" style="margin-top: 30px; background-color: #FFFFFF; margin-bottom: 40px">-->
+            <!--<div class="col">-->
                 <!--<table class="mytable">-->
-                <!--<tr class="mytr">-->
-                <!--<td class="labeltd">-->
-                <!--Người liên hệ-->
-                <!--</td>-->
-                <!--<td class="inputtd">-->
-                <!--<input type="text" formControlName="customer_contact">-->
-                <!--</td>-->
-                <!--</tr>-->
-                <!--<tr class="mytr">-->
-                <!--<td class="labeltd">-->
-                <!--Chức vụ-->
-                <!--</td>-->
-                <!--<td class="inputtd">-->
-                <!--<input type="text">-->
-                <!--</td>-->
-                <!--</tr>-->
-                <!--<tr class="mytr">-->
-                <!--<td class="labeltd">-->
-                <!--Giới tính-->
-                <!--</td>-->
-                <!--<td class="inputtd">-->
-                <!--<input type="text">-->
-                <!--</td>-->
-                <!--</tr>-->
-                <!--<tr class="mytr">-->
-                <!--<td class="labeltd">-->
-                <!--Số di dộng-->
-                <!--</td>-->
-                <!--<td class="inputtd">-->
-                <!--<input type="text">-->
-                <!--</td>-->
-                <!--</tr>-->
-                <!--<tr class="mytr">-->
-                <!--<td class="labeltd">-->
-                <!--Số máy bàn-->
-                <!--</td>-->
-                <!--<td class="inputtd">-->
-                <!--<input type="text">-->
-                <!--</td>-->
-                <!--</tr>-->
-                <!--<tr class="mytr">-->
-                <!--<td class="labeltd">-->
-                <!--Email liên hệ-->
-                <!--</td>-->
-                <!--<td class="inputtd">-->
-                <!--<input type="text">-->
-                <!--</td>-->
-                <!--</tr>-->
-                <!--<tr class="mytr">-->
-                <!--<td class="labeltd">-->
-                <!--Địa chỉ liên hệ-->
-                <!--</td>-->
-                <!--<td class="inputtd">-->
-                <!--<input type="text">-->
-                <!--</td>-->
-                <!--</tr>-->
-                <!--<tr class="mytr">-->
-                <!--<td class="labeltd">-->
-                <!--Ngày sinh nhật-->
-                <!--</td>-->
-                <!--<td class="inputtd">-->
-                <!--&lt;!&ndash;<input type="text">&ndash;&gt;-->
-                <!--<mdb-date-picker name="mydate" [options]="myDatePickerOptions" [placeholder]="'Selected date'" style="margin-bottom: 0px" required></mdb-date-picker>-->
-
-                <!--</td>-->
-                <!--</tr>-->
-                <!--<tr class="mytr">-->
-                <!--<td class="labeltd">-->
-                <!--Nick chat-->
-                <!--</td>-->
-                <!--<td class="inputtd">-->
-                <!--<input type="text">-->
-                <!--</td>-->
-                <!--</tr>-->
-                <!--<tr class="mytr">-->
-                <!--<td class="labeltd">-->
-                <!--Ngày tạo khách hàng-->
-                <!--</td>-->
-                <!--<td class="inputtd">-->
-                <!--<input type="text">-->
-                <!--</td>-->
-                <!--</tr>-->
-                <!--<tr class="mytr">-->
-                <!--<td class="labeltd">-->
-                <!--Tài khoản ngân hàng-->
-                <!--</td>-->
-                <!--<td class="inputtd">-->
-                <!--<input type="text">-->
-                <!--</td>-->
-                <!--</tr>-->
-                <!--<tr class="mytr">-->
-                <!--<td class="labeltd">-->
-                <!--Ngân hàng-->
-                <!--</td>-->
-                <!--<td class="inputtd">-->
-                <!--<input type="text">-->
-                <!--</td>-->
-                <!--</tr>-->
+                    <!--<tr class="mytr">-->
+                        <!--<td class="labeltd">-->
+                            <!--Địa chỉ ĐKKD-->
+                        <!--</td>-->
+                        <!--<td class="inputtd">-->
+                            <!--<input type="text">-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    <!--<tr class="mytr">-->
+                        <!--<td class="labeltd">-->
+                            <!--Địa điểm giao hàng-->
+                        <!--</td>-->
+                        <!--<td class="inputtd">-->
+                            <!--<input type="text">-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    <!--<tr class="mytr">-->
+                        <!--<td class="labeltd">-->
+                            <!--Phường/Xã-->
+                        <!--</td>-->
+                        <!--<td class="inputtd">-->
+                            <!--<input type="text">-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    <!--<tr class="mytr">-->
+                        <!--<td class="labeltd">-->
+                            <!--Quận/Huyện-->
+                        <!--</td>-->
+                        <!--<td class="inputtd">-->
+                            <!--<input type="text">-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    <!--<tr class="mytr">-->
+                        <!--<td class="labeltd">-->
+                            <!--Tỉnh/Thành phố-->
+                        <!--</td>-->
+                        <!--<td class="inputtd">-->
+                            <!--<input type="text">-->
+                        <!--</td>-->
+                    <!--</tr>-->
 
                 <!--</table>-->
-            </div>
+            <!--</div>-->
+            <!--<div class="col">-->
+                <!--<table class="mytable">-->
+                    <!--<tr class="mytr">-->
+                        <!--<td class="labeltd">-->
+                            <!--Quốc gia-->
+                        <!--</td>-->
+                        <!--<td class="inputtd">-->
+                            <!--<input type="text">-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    <!--<tr class="mytr">-->
+                        <!--<td class="labeltd">-->
+                            <!--Phân cấp khách hàng-->
+                        <!--</td>-->
+                        <!--<td class="inputtd">-->
+                            <!--<input type="text">-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    <!--<tr class="mytr">-->
+                        <!--<td class="labeltd">-->
+                            <!--Nợ trước (trước khi sd phần mềm)-->
+                        <!--</td>-->
+                        <!--<td class="inputtd">-->
+                            <!--<input type="text">-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    <!--<tr class="mytr">-->
+                        <!--<td class="labeltd">-->
+                            <!--Đặt lịch CSKH-->
+                        <!--</td>-->
+                        <!--<td class="inputtd">-->
+                            <!--<input type="text">-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    <!--<tr class="mytr">-->
+                        <!--<td class="labeltd">-->
+                            <!--Mô tả-->
+                        <!--</td>-->
+                        <!--<td class="inputtd">-->
+                            <!--<input type="text">-->
+                        <!--</td>-->
+                    <!--</tr>-->
 
-        </div>
-        <div class="row" style="margin-top: 30px; background-color: #FFFFFF; margin-bottom: 40px">
-            <div class="col">
-                <table class="mytable">
-                    <tr class="mytr">
-                        <td class="labeltd">
-                            Địa chỉ ĐKKD
-                        </td>
-                        <td class="inputtd">
-                            <input type="text">
-                        </td>
-                    </tr>
-                    <tr class="mytr">
-                        <td class="labeltd">
-                            Địa điểm giao hàng
-                        </td>
-                        <td class="inputtd">
-                            <input type="text">
-                        </td>
-                    </tr>
-                    <tr class="mytr">
-                        <td class="labeltd">
-                            Phường/Xã
-                        </td>
-                        <td class="inputtd">
-                            <input type="text">
-                        </td>
-                    </tr>
-                    <tr class="mytr">
-                        <td class="labeltd">
-                            Quận/Huyện
-                        </td>
-                        <td class="inputtd">
-                            <input type="text">
-                        </td>
-                    </tr>
-                    <tr class="mytr">
-                        <td class="labeltd">
-                            Tỉnh/Thành phố
-                        </td>
-                        <td class="inputtd">
-                            <input type="text">
-                        </td>
-                    </tr>
-
-                </table>
-            </div>
-            <div class="col">
-                <table class="mytable">
-                    <tr class="mytr">
-                        <td class="labeltd">
-                            Quốc gia
-                        </td>
-                        <td class="inputtd">
-                            <input type="text">
-                        </td>
-                    </tr>
-                    <tr class="mytr">
-                        <td class="labeltd">
-                            Phân cấp khách hàng
-                        </td>
-                        <td class="inputtd">
-                            <input type="text">
-                        </td>
-                    </tr>
-                    <tr class="mytr">
-                        <td class="labeltd">
-                            Nợ trước (trước khi sd phần mềm)
-                        </td>
-                        <td class="inputtd">
-                            <input type="text">
-                        </td>
-                    </tr>
-                    <tr class="mytr">
-                        <td class="labeltd">
-                            Đặt lịch CSKH
-                        </td>
-                        <td class="inputtd">
-                            <input type="text">
-                        </td>
-                    </tr>
-                    <tr class="mytr">
-                        <td class="labeltd">
-                            Mô tả
-                        </td>
-                        <td class="inputtd">
-                            <input type="text">
-                        </td>
-                    </tr>
-
-                </table>
-            </div>
-        </div>
+                <!--</table>-->
+            <!--</div>-->
+        <!--</div>-->
     </form>
 </div>

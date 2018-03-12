@@ -1,10 +1,17 @@
-<table-comp col=5 [arr]="['name','email','index','phone','code']" [data]="cusarr"></table-comp>
+<!--<table-comp col=5 [arr]="['name','email','index','phone','code']" [data]="cusarr"></table-comp>-->
 
-<button-comp content="Hello"></button-comp>
-<div style="width:200px">
-<dropdown-comp content="Hello"></dropdown-comp>
+<!--<button-comp content="Hello"></button-comp>-->
+<!--<div style="width:200px">-->
+<!--<dropdown-comp content="Hello"></dropdown-comp>-->
 
+<!--</div>-->
+<!--<div style="width:600px">-->
+<!--<custom-input labelName="Username"></custom-input>-->
+<!--</div>-->
+<div style="background-color: white">
+<app-input-email labelName="AAAA" [formGroup]="addform" [group]="addform" (change)="display()"></app-input-email>
 </div>
-<div style="width:600px">
-<custom-input labelName="Username"></custom-input>
-</div>
+<!--<div style="width: 200px; height:200px; background-color: #ffffff">-->
+<!--<fi lter-comp ></filter-comp>-->
+<!--</div>-->
+<!--<button-comp content="my button"></button-comp>-->

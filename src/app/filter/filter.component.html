@@ -1,0 +1,8 @@
+<div>
+    <input  type="checkbox" class="filled-in" [(ngModel)]="check" id="checkbox2" >
+    <label for="checkbox2">Label</label>
+    <div *ngIf="check">
+        <mdb-select [options]="optionsSelect" placeholder="Choose your option" class="colorful-select dropdown-primary" ></mdb-select>
+        <input type="text">
+    </div>
+</div>

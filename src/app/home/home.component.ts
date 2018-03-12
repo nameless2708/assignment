@@ -1,28 +1,45 @@
 import { Component, OnInit } from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
+
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
 
-  customer: any;
-  cusarr = [];
-  myarr = ["name","kawai",'wew'];
+    mydata : string;
+    mydata1: string;
+    customer: any;
+    cusarr = [];
+    output = 'hello';
+    myarr = ['owner','cuscode'];
+    input = '';
+    addform : FormGroup;
+
+    onchanging(value){
+        this.input = value;
+        console.log(value);
+    }
 
 
-  constructor() {
-      for ( let n = 0 ; n < 4 ; n++) {
-          this.cusarr.push(this.customer = {id : 'GC1', name : 'Tom', phone : '@fat', email : 'the Bird'
-              , owner : '@fat', address : 'the Bird', code : '@fat'});
-          this.cusarr.push(this.customer = {id : 'GC2', name : 'John', phone : '@fat', email : 'John cena'
-              , owner : '@fat', address : 'the Bird', code : '@fat'});
-      }
-  }
+    constructor(private formbuilder : FormBuilder) {
 
-  ngOnInit() {
-  }
+        // this.addform = new FormGroup({
+        //     AAAA : new FormControl('')
+        // })
+        this.addform = this.formbuilder.group({
+            AAAA : ['']
+        })
+    }
+
+    display(){
+        console.log(this.addform.get('AAAA').value)
+    }
+
+    ngOnInit() {
+    }
 
 
 
